@@ -1,9 +1,11 @@
-import Header from "../components/Header"
+import PostsSection from "../components/PostsSection"
+import HeroSection from "../components/HeroSection"
 
 const Home = () => {
   return (
     <>
-    <Header/>
+      <HeroSection/>
+      <PostsSection/>
     </>
   )
 }
