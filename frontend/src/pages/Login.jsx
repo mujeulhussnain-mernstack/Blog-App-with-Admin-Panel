@@ -28,7 +28,7 @@ const Login = () => {
             })
             if (res.data.success) {
                 toast.success(res.data.message)
-                dispatch(setAdmin(res.data.user))
+                dispatch(setAdmin(res.data.admin))
                 navigate("/admin")
                 email.current.value = ""
                 password.current.value = ""
