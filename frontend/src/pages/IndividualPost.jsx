@@ -72,7 +72,6 @@ const IndividualPost = () => {
         toast.success(res.data.message);
         textRef.current.value = "";
         
-        // Refresh comments only, not entire post
         const commentsRes = await axios.get(`${API_END_POINT}/post/${id}/comments`, {
           withCredentials: true
         });
@@ -171,11 +170,10 @@ const IndividualPost = () => {
           />
         </div>
 
-        {/* Content Section - FIXED */}
         <div className="bg-white rounded-xl p-6 md:p-10 shadow-sm mb-10">
           {post.content ? (
             <div 
-              className="prose prose-lg max-w-none"
+              className="quill-content max-w-none"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
           ) : (
@@ -184,6 +182,134 @@ const IndividualPost = () => {
             </div>
           )}
         </div>
+
+        <style jsx>{`
+          .quill-content {
+            line-height: 1.8;
+            color: #374151;
+          }
+          
+          .quill-content h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #111827;
+            line-height: 1.2;
+          }
+          
+          .quill-content h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #1f2937;
+          }
+          
+          .quill-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #374151;
+          }
+          
+          .quill-content h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #4b5563;
+          }
+          
+          .quill-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+          }
+          
+          .quill-content ul, 
+          .quill-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+          }
+          
+          .quill-content li {
+            margin-bottom: 0.5rem;
+          }
+          
+          .quill-content ul li {
+            list-style-type: disc;
+          }
+          
+          .quill-content ol li {
+            list-style-type: decimal;
+          }
+          
+          .quill-content a {
+            color: #2563eb;
+            text-decoration: underline;
+          }
+          
+          .quill-content a:hover {
+            color: #1d4ed8;
+          }
+          
+          .quill-content blockquote {
+            border-left: 4px solid #e5e7eb;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #6b7280;
+          }
+          
+          .quill-content code {
+            background-color: #f3f4f6;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+            font-size: 0.875rem;
+          }
+          
+          .quill-content pre {
+            background-color: #1f2937;
+            color: #f9fafb;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+          }
+          
+          .quill-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin: 1.5rem 0;
+          }
+          
+          .quill-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+          }
+          
+          .quill-content th,
+          .quill-content td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            text-align: left;
+          }
+          
+          .quill-content th {
+            background-color: #f9fafb;
+            font-weight: 600;
+          }
+          
+          .quill-content hr {
+            border: none;
+            border-top: 1px solid #e5e7eb;
+            margin: 2rem 0;
+          }
+        `}</style>
 
         <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm mb-10">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">

@@ -39,17 +39,17 @@ const AdminDashboard = () => {
     };
 
     fetchData();
-  }, [dispatch]); // Added dependency
+  }, [dispatch]);
 
-  // Calculate statistics
+ 
   const totalBlogs = posts?.length || 0;
   const totalUsers = users || 0;
   
-  // Filter published and draft posts
+  
   const publishedPosts = posts?.filter(post => post.isPublished === true) || [];
   const draftPosts = posts?.filter(post => post.isPublished === false) || [];
   
-  // Get latest published posts (max 5)
+
   const latestBlogs = publishedPosts.slice(0, 5);
 
   if (loading) {
@@ -62,7 +62,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="p-4">
-      {/* Stats Cards */}
+     
       <div className="flex gap-5 flex-wrap py-6">
         <div className="inline-flex items-center justify-center gap-5 h-22 w-50 border border-gray-200 rounded-lg hover:scale-105 transition-all duration-300 cursor-pointer shadow-sm">
           <span className="h-12 w-12 inline-flex justify-center items-center bg-blue-50 rounded-lg text-blue-600">
@@ -95,7 +95,7 @@ const AdminDashboard = () => {
         </div>
       </div>
 
-      {/* Published vs Draft Stats */}
+    
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
           <h3 className="font-semibold text-lg mb-3">Published Posts</h3>
@@ -114,7 +114,7 @@ const AdminDashboard = () => {
         </div>
       </div>
 
-      {/* Latest Blogs Section */}
+    
       <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-200">
           <h2 className="text-xl font-semibold">Latest Published Blogs</h2>

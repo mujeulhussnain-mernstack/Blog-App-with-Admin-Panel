@@ -67,12 +67,9 @@ const Footer = () => {
 
                 </div>
 
-                <div className="flex flex-col sm:flex-row justify-between items-center pt-6 border-t">
+                <div className="flex-center pt-6 border-t">
                     <p className="text-gray-500 text-sm mb-2 sm:mb-0">
-                        © {new Date().getFullYear()} QuickBlog
-                    </p>
-                    <p className="text-gray-400 text-xs">
-                        A solo writing project
+                        © {new Date().getFullYear()} QuickBlog Mujeeb Ul Hussnain - All Right Reserved.
                     </p>
                 </div>
 

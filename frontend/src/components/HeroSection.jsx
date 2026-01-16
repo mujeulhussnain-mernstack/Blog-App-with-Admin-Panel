@@ -1,7 +1,18 @@
 import { Search } from 'lucide-react';
+import { useRef } from 'react';
+import { toast } from "react-hot-toast"
+import { useDispatch } from "react-redux"
+import { setSearchPostTile } from '../store/getPost';
 const HeroSection = () => {
+    const dispatch = useDispatch()
+    const titleRef = useRef()
     const searchBlog = (e) => {
         e.preventDefault();
+        if (titleRef.current.value) {
+            dispatch(setSearchPostTile(titleRef.current.value.trim() || ""))
+        } else {
+            toast.error("Add post's title to start searching.")
+        }
     }
     return (
         <div className='pt-20 lg:pt-30 w-full'>
@@ -22,6 +33,7 @@ const HeroSection = () => {
                         onSubmit={searchBlog}
                         className='flex-center h-12 border border-black w-70 lg:w-90 shadow-[-8px_8px_0px_0px_black]'>
                         <input type="text"
+                            ref={titleRef}
                             placeholder='Search via title...'
                             className='h-full px-2 focus:outline-none w-full'
                         />

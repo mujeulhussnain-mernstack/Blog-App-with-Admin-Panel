@@ -5,7 +5,8 @@ const post = createSlice({
         post: null,
         allPosts: null,
         individualPost: null,
-        postComments: null
+        postComments: null,
+        searchedPostTitle: null
     },
     reducers: {
         getPost: (state, action) => {
@@ -19,8 +20,11 @@ const post = createSlice({
         },
         setPostComments: (state, action) => {
             state.postComments = action.payload
+        },
+        setSearchPostTile: (state, action) => {
+            state.searchedPostTitle = action.payload
         }
     }
 })
-export const { getPost, setAllPosts, setIndividualPost, setPostComments } = post.actions;
+export const { getPost, setAllPosts, setIndividualPost, setPostComments, setSearchPostTile } = post.actions;
 export default post.reducer

@@ -22,7 +22,7 @@ const Header = () => {
     }
     return (
         <div className="w-full h-20 fixed top-0 left-0 z-[999]">
-            <div className="max-w-5xl h-full mx-auto flex justify-between items-center px-2 lg:px-0 bg-transparent backdrop-blur-lg">
+            <div className="max-w-5xl h-full mx-auto flex justify-between items-center px-2 lg:px-0 bg-white border-b border-gray-600">
                 <Link to={"/"} className="text-2xl md:text-3xl lg:text-4xl font-bold poppins">
                     <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                         Quick

@@ -124,7 +124,7 @@ const AdminAddBlog = () => {
       <h1 className="text-xl font-bold text-gray-800 mb-6">Create Post</h1>
       <form onSubmit={inputDataHandler}>
         <div className="space-y-5">
-          {/* Title */}
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Title *</label>
             <input
@@ -135,7 +135,7 @@ const AdminAddBlog = () => {
             />
           </div>
 
-          {/* Subtitle */}
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Subtitle</label>
             <input
@@ -146,7 +146,7 @@ const AdminAddBlog = () => {
             />
           </div>
 
-          {/* Image */}
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Image *</label>
             {imagePreview ? (
@@ -188,7 +188,7 @@ const AdminAddBlog = () => {
             )}
           </div>
 
-          {/* Content with AI Button */}
+
           <div>
             <div className="flex justify-between items-center mb-2">
               <label className="text-sm font-medium text-gray-700">Content *</label>
@@ -209,7 +209,7 @@ const AdminAddBlog = () => {
             </div>
           </div>
 
-          {/* Category */}
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Category *</label>
             <select
@@ -223,7 +223,7 @@ const AdminAddBlog = () => {
             </select>
           </div>
 
-          {/* Publish Checkbox */}
+
           <div className="flex items-center gap-3 p-3 border border-gray-300 rounded-lg">
             <input
               type="checkbox"
@@ -237,7 +237,7 @@ const AdminAddBlog = () => {
             </label>
           </div>
 
-          {/* Submit Button */}
+
           <button
             type="submit"
             className="w-full py-3 text-white rounded-lg bg-blue-500 font-medium cursor-pointer hover:bg-blue-600 duration-200 transition-colors flex-center"

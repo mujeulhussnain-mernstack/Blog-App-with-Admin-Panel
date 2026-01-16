@@ -9,7 +9,7 @@ export const Subscribe = () => {
                 Subscribe to get the latest blog, new tech, and exclusive news.
             </p>
             <div className="w-full max-w-120 border h-12 border-black shadow-[-8px_8px_0px_0px_black] flex">
-                <input type="text" className="focus:outline-none h-full w-full px-2" placeholder="Enter you email id .."/>
+                <input type="text" className="focus:outline-none h-full w-full px-2" placeholder="Enter you email id .." />
                 <Link to="/register" className="border-l h-full border-black px-4 flex-center font-medium hover:bg-black hover:text-white transition-colors duration-300">Subscribe</Link>
             </div>
         </div>

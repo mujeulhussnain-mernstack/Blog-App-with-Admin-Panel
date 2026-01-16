@@ -5,36 +5,36 @@ import sharp from "sharp"
 import cloudinary from "../utils/cloudinary.js"
 import generateContent from '../utils/gemini.js'
 // Actions related to the user
-export const LikePost = async (req, res) => {
-    try {
-        const userId = req.id;
-        const postId = req.params.id;
-        const post = await Post.findById(postId)
-        if (!post) {
-            return res.status(404).json({ message: 'Post not found.', success: false });
-        }
-        await post.updateOne({ $addToSet: { likes: userId } })
-        await post.save();
-        return res.status(200).json({ message: 'Liked.', success: true });
-    } catch (error) {
-        console.log(error);
-    }
-}
-export const DislikePost = async (req, res) => {
-    try {
-        const userId = req.id;
-        const postId = req.params.id;
-        const post = await Post.findById(postId)
-        if (!post) {
-            return res.status(404).json({ message: 'Post not found.', success: false });
-        }
-        await post.updateOne({ $pull: { likes: userId } })
-        await post.save();
-        return res.status(200).json({ message: 'Disliked', success: true });
-    } catch (error) {
-        console.log(error);
-    }
-}
+// export const LikePost = async (req, res) => {
+//     try {
+//         const userId = req.id;
+//         const postId = req.params.id;
+//         const post = await Post.findById(postId)
+//         if (!post) {
+//             return res.status(404).json({ message: 'Post not found.', success: false });
+//         }
+//         await post.updateOne({ $addToSet: { likes: userId } })
+//         await post.save();
+//         return res.status(200).json({ message: 'Liked.', success: true });
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+// export const DislikePost = async (req, res) => {
+//     try {
+//         const userId = req.id;
+//         const postId = req.params.id;
+//         const post = await Post.findById(postId)
+//         if (!post) {
+//             return res.status(404).json({ message: 'Post not found.', success: false });
+//         }
+//         await post.updateOne({ $pull: { likes: userId } })
+//         await post.save();
+//         return res.status(200).json({ message: 'Disliked', success: true });
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 export const AddComment = async (req, res) => {
     try {
         const userId = req.id;
@@ -88,12 +88,12 @@ export const GetAllPosts = async (_, res) => {
     }
 }
 export const GetAllUsers = async (_, res) => {
-  try {
-    const users = await User.find();
-    return res.status(200).json({users: users.length, success: true})
-  } catch (error) {
-    console.log(error);
-  }
+    try {
+        const users = await User.find();
+        return res.status(200).json({ users: users.length, success: true })
+    } catch (error) {
+        console.log(error);
+    }
 }
 export const GetCommentsOfPost = async (req, res) => {
     try {
@@ -102,24 +102,32 @@ export const GetCommentsOfPost = async (req, res) => {
         if (!post) {
             return res.status(404).json({ message: 'Post not found.', success: false });
         }
-        const comments = await Comment.find({ _id: post.comments }).sort({createdAt: -1}).populate({path: "user", select: 'profilePicture username'})
+        const comments = await Comment.find({ _id: post.comments }).sort({ createdAt: -1 }).populate({ path: "user", select: 'profilePicture username' })
         return res.status(200).json({ success: true, comments });
     } catch (error) {
         console.log(error);
     }
 }
-
+export const GetLatestComments = async (req, res) => {
+    try {
+        const comments = await Comment.find().sort({ createdAt: -1 }).populate({ path: "user", select: 'profilePicture username' })
+        return res.status(200).json({ success: true, comments });
+    } catch (error) {
+        console.log(error);
+    }
+}
 // Admin's Actions
 // add new post
 // publish or unpublish post
 // delete post
 // delete comment
+
 export const AddNewPost = async (req, res) => {
     try {
 
         const { title, content, category, isPublished, subTitle } = req.body;
         const image = req.file;
-        
+
         if (!title || !content || !category || !isPublished) {
             console.log("Missing fields:", {
                 title: !title,
@@ -128,30 +136,30 @@ export const AddNewPost = async (req, res) => {
                 isPublished: !isPublished,
                 image: !image
             });
-            return res.status(400).json({ 
-                message: 'Check every field.', 
-                success: false 
+            return res.status(400).json({
+                message: 'Check every field.',
+                success: false
             });
         }
-        
+
         if (!image || !image.buffer) {
-            return res.status(400).json({ 
-                message: 'Image is required.', 
-                success: false 
+            return res.status(400).json({
+                message: 'Image is required.',
+                success: false
             });
         }
-        
+
         const optimizedImage = await sharp(image.buffer)
             .resize(1200, 800, { fit: 'inside' })
             .toFormat('jpeg', { quality: 90 })
             .toBuffer();
-        
+
         const dataUri = `data:image/jpeg;base64,${optimizedImage.toString('base64')}`;
-        
+
         const cloudResponse = await cloudinary.uploader.upload(dataUri, {
             folder: 'blog-posts'
         });
-        
+
         if (cloudResponse) {
             const post = await Post.create({
                 title,
@@ -161,19 +169,19 @@ export const AddNewPost = async (req, res) => {
                 category,
                 isPublished: isPublished === 'true' || isPublished === true
             });
-            
-            return res.status(201).json({ 
-                message: "Post added successfully.", 
-                success: true, 
-                post 
+
+            return res.status(201).json({
+                message: "Post added successfully.",
+                success: true,
+                post
             });
         }
-        
+
     } catch (error) {
         console.log("Backend error:", error);
-        return res.status(500).json({ 
-            message: error.message || 'Internal server error', 
-            success: false 
+        return res.status(500).json({
+            message: error.message || 'Internal server error',
+            success: false
         });
     }
 }
@@ -198,7 +206,7 @@ export const Unpublish = async (req, res) => {
         if (!post) {
             return res.status(404).json({ message: 'Post not found.', success: false });
         }
-        await post.updateOne({ isPublished: true })
+        await post.updateOne({ isPublished: false })
         await post.save();
         return res.status(200).json({ message: "Unpublished.", success: true });
     } catch (error) {
@@ -213,25 +221,25 @@ export const DeletePost = async (req, res) => {
             return res.status(404).json({ message: 'Post not found.', success: false });
         }
         await Post.findByIdAndDelete(postId)
-        await Comment.deleteMany({ _id: postId })
+        await Comment.deleteMany({ _id: post.comments })
         return res.status(200).json({ message: "Post deleted.", success: true });
     } catch (error) {
         console.log(error);
     }
 }
-export const DeleteComment = async (req, res) => {
-    try {
-        const commentId = req.params.id;
-        const comment = await Comment.findById(commentId)
-        if (!comment) {
-            return res.status(404).json({ message: 'Comment not found.', success: false });
-        }
-        await Post.findByIdAndDelete(comment)
-        return res.status(200).json({ message: "Comment deleted.", success: true });
-    } catch (error) {
-        console.log(error);
-    }
-}
+// export const DeleteComment = async (req, res) => {
+//     try {
+//         const commentId = req.params.id;
+//         const comment = await Comment.findById(commentId)
+//         if (!comment) {
+//             return res.status(404).json({ message: 'Comment not found.', success: false });
+//         }
+//         await Post.findByIdAndDelete(comment)
+//         return res.status(200).json({ message: "Comment deleted.", success: true });
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 // generate content
 
 export const GenerateContent = async (req, res) => {

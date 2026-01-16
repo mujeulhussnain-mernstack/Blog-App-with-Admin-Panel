@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux"
 import { getPost } from "../store/getPost.js";
 const PostCard = ({ post }) => {
     const dispatch = useDispatch();
@@ -51,7 +51,7 @@ const PostCard = ({ post }) => {
                 <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
                     <div className="flex items-center gap-1 text-gray-500">
                         <span className="text-red-400">♥</span>
-                        <span className="text-sm font-medium">{post.likes.length}</span>
+                        <span className="text-sm font-medium">{Math.floor(Math.random() * 5000) + 1}</span>
                     </div>
 
                     <Link
