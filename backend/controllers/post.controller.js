@@ -38,7 +38,6 @@ import generateContent from '../utils/gemini.js'
 export const AddComment = async (req, res) => {
     try {
         const userId = req.id;
-        console.log(userId)
         const { text } = req.body;
         if (!text) {
             return res.status(401).json({ message: 'Comment required.', success: false });
