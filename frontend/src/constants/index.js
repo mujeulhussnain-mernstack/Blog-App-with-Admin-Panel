@@ -1,4 +1,4 @@
-export const API_END_POINT = "http://localhost:2020/api/v1";
+export const API_END_POINT = "https://blog-app-with-admin-panel-joe3.onrender.com/api/v1";
 export const categories = ["All", "Tech", "Philosophy", "Daily Living"]
 export const quickLinks = ["Home", "Best Sellers", "Offers & Deals", "Contact Us", "FAQs"]
 export const needHelp = ["Delivery Information", "Return & Refund Policy", "Payment Methods",
